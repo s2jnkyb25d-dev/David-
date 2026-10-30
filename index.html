@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eaf5fa">
+  <meta name="description" content="認識 David：在專業學習、重訓與籃球之間，持續練習自律、判斷與團隊合作。">
+  <title>David｜把自律活成自己的節奏</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #eaf5fa;
+      --ink: #173b57;
+      --muted: #557080;
+      --line: #bfd5df;
+      --lime: #c4e5ef;
+      --orange: #d9654e;
+      --night-muted: #c1d5de;
+      --night-line: #527489;
+      --serif: "Iowan Old Style", "Baskerville", "Times New Roman", serif;
+      --sans: "Avenir Next", Avenir, "Noto Sans TC", "PingFang TC", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    button { font: inherit; }
+    .wrap { width: min(1320px, calc(100% - 96px)); margin-inline: auto; }
+
+    .topbar {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+      z-index: 3;
+    }
+    .wordmark {
+      font-family: var(--serif);
+      font-size: 25px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; align-items: center; gap: 34px; }
+    .nav-links a {
+      font-size: 13px;
+      text-decoration: none;
+      color: var(--muted);
+      transition: color .2s ease;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible { color: var(--ink); }
+    .nav-links .nav-contact {
+      color: var(--ink);
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 5px;
+    }
+    .menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+    }
+    .menu-toggle svg { width: 22px; height: 22px; display: block; }
+
+    .hero {
+      min-height: min(790px, calc(100svh - 82px));
+      display: grid;
+      grid-template-columns: 1.02fr .98fr;
+      align-items: center;
+      gap: clamp(40px, 7vw, 108px);
+      padding-block: 66px 76px;
+    }
+    .eyebrow, .section-kicker, .photo-caption, .footer-note {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .eyebrow { display: flex; align-items: center; gap: 11px; color: var(--muted); }
+    .eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--orange); }
+    h1 {
+      max-width: 650px;
+      margin: 23px 0 25px;
+      font-size: clamp(60px, 8.3vw, 112px);
+      font-weight: 600;
+      line-height: .98;
+      letter-spacing: 0;
+    }
+    h1 .name { font-family: var(--serif); font-weight: 500; font-style: italic; }
+    .hero-copy {
+      max-width: 440px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.95;
+    }
+    .hero-actions { display: flex; align-items: center; gap: 24px; margin-top: 33px; }
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .text-link svg { width: 17px; height: 17px; transition: transform .2s ease; }
+    .text-link:hover svg { transform: translateX(4px); }
+    .text-link.primary { padding: 14px 18px; background: var(--lime); }
+    .text-link.secondary { border-bottom: 1px solid var(--line); padding-block: 12px; }
+    .portrait-wrap { position: relative; min-width: 0; }
+    .portrait {
+      display: block;
+      width: 100%;
+      height: min(590px, 66vw);
+      min-height: 410px;
+      object-fit: cover;
+      object-position: 50% 45%;
+      filter: saturate(.82);
+    }
+    .portrait-wrap::after {
+      content: "";
+      position: absolute;
+      inset: 14px -14px -14px 14px;
+      border: 1px solid var(--line);
+      pointer-events: none;
+      z-index: -1;
+    }
+    .photo-caption {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 26px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .ticker {
+      overflow: hidden;
+      border-block: 1px solid var(--line);
+      background: var(--lime);
+    }
+    .ticker-inner {
+      width: max-content;
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      padding: 16px 0;
+      font-size: 12px;
+      font-weight: 650;
+      letter-spacing: .08em;
+    }
+    .ticker-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--orange); }
+
+    .intro-section { padding-block: 126px 135px; }
+    .section-heading {
+      display: grid;
+      grid-template-columns: .38fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .section-kicker { color: var(--muted); padding-top: 13px; }
+    h2 {
+      max-width: 850px;
+      margin: 0;
+      font-size: clamp(38px, 5.1vw, 68px);
+      font-weight: 500;
+      line-height: 1.28;
+    }
+    h2 em { color: var(--orange); font-family: var(--serif); font-weight: 400; }
+    .intro-detail {
+      display: grid;
+      grid-template-columns: .38fr 1fr;
+      gap: 40px;
+      margin-top: 47px;
+    }
+    .intro-detail p {
+      grid-column: 2;
+      max-width: 590px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 2;
+    }
+
+    .values-section { background: var(--ink); color: var(--paper); padding-block: 94px 100px; }
+    .values-top { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 45px; }
+    .values-top .section-kicker { color: var(--night-muted); }
+    .values-top h2 { font-size: clamp(36px, 4.3vw, 57px); }
+    .values-top p { width: 230px; margin: 0 0 5px; color: var(--night-muted); font-size: 13px; line-height: 1.8; }
+    .value-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--night-line); }
+    .value-item { min-height: 220px; padding: 25px 28px 20px 0; border-right: 1px solid var(--night-line); }
+    .value-item + .value-item { padding-left: 28px; }
+    .value-item:last-child { border-right: 0; }
+    .value-number { color: var(--lime); font-family: var(--serif); font-size: 19px; font-style: italic; }
+    .value-item h3 { margin: 35px 0 12px; font-size: 22px; font-weight: 500; }
+    .value-item p { max-width: 290px; margin: 0; color: var(--night-muted); font-size: 13px; line-height: 1.9; }
+
+    .rhythm-section { padding-block: 124px 130px; }
+    .rhythm-head { display: grid; grid-template-columns: .38fr 1fr; gap: 40px; margin-bottom: 55px; }
+    .rhythm-head h2 { font-size: clamp(40px, 5.3vw, 70px); }
+    .rhythm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+    .rhythm-card { min-height: 260px; padding: clamp(24px, 4vw, 48px); background: var(--paper); }
+    .rhythm-card:nth-child(2) { background: #d6ebf4; }
+    .rhythm-icon { width: 39px; height: 39px; display: grid; place-items: center; border: 1px solid var(--line); color: var(--orange); }
+    .rhythm-icon svg { width: 20px; height: 20px; }
+    .rhythm-card h3 { margin: 29px 0 10px; font-size: 25px; font-weight: 500; }
+    .rhythm-card p { max-width: 390px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.9; }
+
+    .closing {
+      display: grid;
+      grid-template-columns: .38fr 1fr;
+      gap: 40px;
+      padding-block: 68px 82px;
+      border-top: 1px solid var(--line);
+    }
+    .closing blockquote { max-width: 790px; margin: 0; font-family: var(--serif); font-size: clamp(31px, 4.7vw, 61px); line-height: 1.3; }
+    .closing cite { display: block; margin-top: 27px; color: var(--muted); font-family: var(--sans); font-size: 12px; font-style: normal; }
+    footer { border-top: 1px solid var(--line); }
+    .footer-row { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .footer-name { font-family: var(--serif); font-size: 18px; font-weight: 700; }
+    .footer-note { color: var(--muted); font-size: 10px; }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal { opacity: 0; transform: translateY(20px); transition: opacity .65s ease, transform .65s ease; }
+      .reveal.is-visible { opacity: 1; transform: none; }
+      .ticker-inner { animation: drift 26s linear infinite; }
+      @keyframes drift { to { transform: translateX(-36%); } }
+      .hero-copy, .portrait-wrap { animation: settle .8s both; }
+      .portrait-wrap { animation-delay: .12s; }
+      @keyframes settle { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 40px, 600px); }
+      .topbar { min-height: 70px; }
+      .menu-toggle { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 69px;
+        left: 0;
+        right: 0;
+        padding: 12px 20px 20px;
+        border: 1px solid var(--line);
+        background: var(--paper);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+      }
+      .nav-links.is-open { display: flex; }
+      .nav-links a { padding: 14px 4px; border-bottom: 1px solid var(--line); }
+      .nav-links .nav-contact { border-bottom: 0; }
+      .hero { min-height: 0; grid-template-columns: 1fr; gap: 43px; padding-block: 57px 68px; }
+      h1 { max-width: 500px; margin-block: 20px 18px; font-size: clamp(59px, 16vw, 92px); }
+      .hero-copy { max-width: 500px; font-size: 15px; }
+      .hero-actions { margin-top: 24px; gap: 20px; }
+      .portrait-wrap { width: calc(100% - 14px); margin: 0 14px 0 0; }
+      .portrait { height: min(112vw, 490px); min-height: 340px; object-position: 50% 44%; }
+      .photo-caption { margin-top: 21px; }
+      .ticker-inner { padding-block: 13px; gap: 24px; font-size: 11px; }
+      .intro-section { padding-block: 85px 91px; }
+      .section-heading, .intro-detail, .rhythm-head, .closing { grid-template-columns: 1fr; gap: 23px; }
+      .section-kicker { padding-top: 0; }
+      h2 { font-size: clamp(38px, 10vw, 58px); }
+      .intro-detail { margin-top: 23px; }
+      .intro-detail p { grid-column: 1; font-size: 14px; }
+      .values-section { padding-block: 70px 75px; }
+      .values-top { display: block; margin-bottom: 31px; }
+      .values-top h2 { margin-top: 20px; font-size: clamp(36px, 9vw, 52px); }
+      .values-top p { width: auto; max-width: 340px; margin-top: 17px; }
+      .value-grid { grid-template-columns: 1fr; }
+      .value-item, .value-item + .value-item { min-height: 0; padding: 23px 0 25px; border-right: 0; border-bottom: 1px solid var(--night-line); }
+      .value-item:last-child { border-bottom: 0; }
+      .value-item h3 { margin-top: 18px; }
+      .rhythm-section { padding-block: 83px 87px; }
+      .rhythm-head { margin-bottom: 30px; }
+      .rhythm-head h2 { font-size: clamp(40px, 10vw, 58px); }
+      .rhythm-grid { grid-template-columns: 1fr; }
+      .rhythm-card { min-height: 220px; padding: 28px; }
+      .closing { padding-block: 47px 57px; }
+      .closing blockquote { font-size: clamp(33px, 9vw, 48px); }
+      .footer-row { min-height: 70px; }
+    }
+    @media (max-width: 380px) {
+      .wrap { width: calc(100% - 32px); }
+      .hero-actions { align-items: flex-start; flex-direction: column; gap: 10px; }
+      .text-link.secondary { padding-block: 8px; }
+      .photo-caption { font-size: 9px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar wrap">
+    <a class="wordmark" href="#top" aria-label="David，回到首頁">David.</a>
+    <button class="menu-toggle" type="button" aria-label="開啟導覽選單" aria-expanded="false" aria-controls="site-nav">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="nav-links" id="site-nav" aria-label="主要導覽">
+      <a href="#about">關於我</a>
+      <a href="#values">我的特質</a>
+      <a href="#rhythm">日常節奏</a>
+      <a class="nav-contact" href="#hello">留下一句話 <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <div class="eyebrow">A little about me</div>
+        <h1 id="hero-title">把自律，<br>活成自己的<br><span class="name">節奏。</span></h1>
+        <p class="hero-copy">嗨，我是 David。習慣在挑戰裡前進，在專業學習與運動之間找到平衡。比起停在舒適圈，我更喜歡看看自己還能走多遠。</p>
+        <div class="hero-actions">
+          <a class="text-link primary" href="#about">往下認識我
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+          </a>
+          <a class="text-link secondary" href="#rhythm">我的生活切面</a>
+        </div>
+      </div>
+      <figure class="portrait-wrap">
+        <img class="portrait" src="david-profile.jpg" alt="David 的個人自拍照" fetchpriority="high">
+        <figcaption class="photo-caption"><span>DAVID / IN PROGRESS</span><span>持續練習，持續前進</span></figcaption>
+      </figure>
+    </section>
+
+    <div class="ticker" aria-label="專業學習、重訓、籃球、持續前進">
+      <div class="ticker-inner" aria-hidden="true">
+        <span>專業學習</span><i class="ticker-dot"></i><span>重訓</span><i class="ticker-dot"></i><span>籃球</span><i class="ticker-dot"></i><span>保持好奇</span><i class="ticker-dot"></i><span>持續前進</span><i class="ticker-dot"></i><span>專業學習</span><i class="ticker-dot"></i><span>重訓</span><i class="ticker-dot"></i><span>籃球</span><i class="ticker-dot"></i><span>保持好奇</span><i class="ticker-dot"></i><span>持續前進</span>
+      </div>
+    </div>
+
+    <section class="intro-section wrap reveal" id="about" aria-labelledby="about-title">
+      <div class="section-heading">
+        <div class="section-kicker">01 / A mindset</div>
+        <h2 id="about-title">我相信，真正的進步，<br>來自一次次<em>不放棄</em>。</h2>
+      </div>
+      <div class="intro-detail">
+        <div></div>
+        <p>我把生活看成一場長期修煉。面對新的挑戰，我會先冷靜看清問題，再把注意力放回能做的事上。每次跨過一道難關，不只是完成一件事，也是在重新認識自己的可能。</p>
+      </div>
+    </section>
+
+    <section class="values-section reveal" id="values" aria-labelledby="values-title">
+      <div class="wrap">
+        <div class="values-top">
+          <div>
+            <div class="section-kicker">02 / What I bring</div>
+            <h2 id="values-title">冷靜思考，<br>也真心在乎。</h2>
+          </div>
+          <p>理性幫我釐清方向，同理心提醒我看見身邊的人。</p>
+        </div>
+        <div class="value-grid">
+          <article class="value-item">
+            <span class="value-number">01</span>
+            <h3>看見核心</h3>
+            <p>事情再複雜，也先找出真正重要的問題，讓下一步更清楚。</p>
+          </article>
+          <article class="value-item">
+            <span class="value-number">02</span>
+            <h3>穩住節奏</h3>
+            <p>壓力來的時候保持正向，專注當下，逐步找到突破口。</p>
+          </article>
+          <article class="value-item">
+            <span class="value-number">03</span>
+            <h3>一起變好</h3>
+            <p>重視合作中的默契與理解，也願意為共同目標投入行動。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="rhythm-section wrap reveal" id="rhythm" aria-labelledby="rhythm-title">
+      <div class="rhythm-head">
+        <div class="section-kicker">03 / Outside the routine</div>
+        <h2 id="rhythm-title">讓身體動起來，<br>讓腦袋重新歸零。</h2>
+      </div>
+      <div class="rhythm-grid">
+        <article class="rhythm-card">
+          <div class="rhythm-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 9v6m4-9v12m8-12v12m4-9v6M8 12h8M2 10v4m20-4v4"/></svg></div>
+          <h3>重訓 / 與自己較勁</h3>
+          <p>在一次次練習裡累積力量，也練習把承諾化為行動。</p>
+        </article>
+        <article class="rhythm-card">
+          <div class="rhythm-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3.5 8.5c4 1 7 3.5 8.5 7.5m2-12c-.5 4-2 7-5 10m8.5 4c-2-3-5-5-9-5"/></svg></div>
+          <h3>籃球 / 在團隊裡思考</h3>
+          <p>球場上要觀察、判斷，也要相信隊友。每個人的選擇，讓團隊一起往前。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="closing wrap reveal" id="hello" aria-labelledby="hello-title">
+      <div class="section-kicker">A note to remember</div>
+      <div>
+        <blockquote id="hello-title">「自律不是約束，<br>而是掌控生活的力量。」</blockquote>
+        <cite>— David</cite>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-row wrap">
+      <a class="footer-name" href="#top" aria-label="回到頁首">David.</a>
+      <span class="footer-note">MADE WITH INTENTION · 2026</span>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector('.menu-toggle');
+    const navigation = document.querySelector('.nav-links');
+
+    menuButton.addEventListener('click', () => {
+      const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!isOpen));
+      menuButton.setAttribute('aria-label', isOpen ? '開啟導覽選單' : '關閉導覽選單');
+      navigation.classList.toggle('is-open', !isOpen);
+    });
+
+    navigation.addEventListener('click', (event) => {
+      if (event.target.closest('a')) {
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.setAttribute('aria-label', '開啟導覽選單');
+        navigation.classList.remove('is-open');
+      }
+    });
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal').forEach((section) => observer.observe(section));
+    } else {
+      document.querySelectorAll('.reveal').forEach((section) => section.classList.add('is-visible'));
+    }
+  </script>
+</body>
+</html>
